@@ -2,18 +2,21 @@
     position: fixed;
     cursor: pointer;
     background-color: white;
-    width: 20px;
+    width: 30px;
+    height: 30px;
+    border: grey solid 4px;
+    border-radius: 10px;
     text-align: center;
 }
 
 .planet:hover {
-    background-color: #ccf;
+    border: yellow solid 4px;
 }
 
 #map {
     width: 1000px;
     height: 600px;
-    background-color: turquoise;
+    background-color: #fff;
     position: absolute;
     -webkit-user-select: none; /* Chrome/Safari */        
     -moz-user-select: none; /* Firefox */
@@ -23,12 +26,28 @@
 }
 
 #sidebar {
-    width: 200px;
+    width: 400px;
     height: 600px;
     background-color: blue;
     position: absolute;
-    transform: translate(1000px);
+    transform: translate(1010px);
     font-size: 20px;
     padding: 10px;
     box-sizing: border-box;
+}
+
+#menu {
+    width: 1410px;
+    height: 300px;
+    position: absolute;
+    transform: translate(0, 610px);
+    background-color: white;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    margin: 10px;
 }
