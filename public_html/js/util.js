@@ -3,12 +3,6 @@
 /* global faction */
 
 var util = new (function() {
-    var factionColors = {
-        "C": "red",
-        "A": "green",
-        "U": "blue",
-        "S": "yellow"
-    };
     
     this.Planet = function (x, y, owner, id) {
         this.x = x;
@@ -38,6 +32,16 @@ var util = new (function() {
         return 0;
     };
     
+    // seeded random so the map looks the same every time.
+    var rand = {
+        t: 0,
+        gen: function() {
+            this.t = (this.t + 1337) * 31 % 10000;
+            return this.t / 10000;
+        }
+        
+    };
+    
     this.addCoords = function(orig_planets) {
         var planets = [];
         for (var i in orig_planets) {
@@ -48,8 +52,8 @@ var util = new (function() {
             var d = 0;
             var planet = null;
             while (d < 50) {
-                var x = Math.random() * 900 + 50;
-                var y = Math.random() * 500 + 50;
+                var x = rand.gen() * 900 + 50;
+                var y = rand.gen() * 500 + 50;
                 planet = new util.Planet(x, y, faction, id);
                 d = 1000;
                 for (var j in planets) {
@@ -58,32 +62,6 @@ var util = new (function() {
             }
             planets.push(planet);
         }
-        return planets;
-    };
-    
-    this.generatePlanets = function(n) {
-        var planets = [];
-        var factions = ["Aeon", "Cybran", "UEF", "Seraphim"];
-        for (var f in factions) {
-            var faction = factions[f];
-            var i = 0;
-            i = 0;
-            for (i = 0; i < n; ++i) {
-                var d = 0;
-                var planet = null;
-                while (d < 25) {
-                    var x = Math.random() * 900 + 50;
-                    var y = Math.random() * 500 + 50;
-                    planet = new util.Planet(x, y, faction);
-                    d = 1000;
-                    for (var j in planets) {
-                        d = Math.min(d, planet.distance(planets[j]));
-                    }
-                }
-                planets.push(planet);
-            }
-        }
-        planets.sort(util.planetComparator);
         return planets;
     };
 })();
